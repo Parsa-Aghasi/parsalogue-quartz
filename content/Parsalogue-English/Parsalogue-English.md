@@ -1,6 +1,6 @@
 ---
 title: English Parsalogue
-description: English articles by Parsa Aghasi on physiology, systems thinking and subtle overlooked details.
+description: "Written Thoughts of Parsa Aghasi: A Bilingual Blog"
 lang: en
 aliases:
   - english

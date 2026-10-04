@@ -14,7 +14,9 @@ export default (() => {
   }: QuartzComponentProps) => {
     const titleSuffix = cfg.pageTitleSuffix ?? ""
     const title =
-      (fileData.frontmatter?.title ?? i18n(cfg.locale).propertyDefaults.title) + titleSuffix
+      (fileData.frontmatter?.seoTitle ??
+        fileData.frontmatter?.title ??
+        i18n(cfg.locale).propertyDefaults.title) + titleSuffix
     const description =
       fileData.frontmatter?.socialDescription ??
       fileData.frontmatter?.description ??
@@ -41,11 +43,25 @@ export default (() => {
       fileData.slug === "index"
         ? {
             "@context": "https://schema.org",
-            "@type": "WebSite",
-            name: cfg.pageTitle,
-            url: canonicalUrl,
-            description,
-            inLanguage: ["en", "fa"],
+            "@graph": [
+              {
+                "@type": "WebSite",
+                "@id": `${canonicalUrl}#website`,
+                name: cfg.pageTitle,
+                alternateName: "Parsalogue Blog",
+                url: canonicalUrl,
+                description,
+                inLanguage: ["en", "fa"],
+                publisher: { "@id": `${canonicalUrl}#parsa-aghasi` },
+              },
+              {
+                "@type": "Person",
+                "@id": `${canonicalUrl}#parsa-aghasi`,
+                name: "Parsa Aghasi",
+                alternateName: "پارسا آقاسی",
+                url: canonicalUrl,
+              },
+            ],
           }
         : isArticle
           ? {
