@@ -1,4 +1,5 @@
 @use "./variables.scss" as *;
+@use "./echothread.scss";
 
 @font-face {
   font-family: "Vazirmatn";
@@ -6,6 +7,12 @@
   font-weight: 100 900;
   font-style: normal;
   font-display: swap;
+}
+
+/* EchoThread applies its system font with !important, so this must be more specific. */
+#echothread .et-widget,
+#echothread .et-widget * {
+  font-family: "Vazirmatn", sans-serif !important;
 }
 
 .page > #quartz-body .sidebar {

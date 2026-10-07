@@ -32,6 +32,7 @@ import Flex from "../../components/Flex"
 import MobileOnly from "../../components/MobileOnly"
 import DesktopOnly from "../../components/DesktopOnly"
 import ConditionalRender from "../../components/ConditionalRender"
+import EchoThread from "../../components/EchoThread"
 
 const CONFIG_YAML_PATH = path.join(process.cwd(), "quartz.config.yaml")
 const DEFAULT_CONFIG_YAML_PATH = path.join(process.cwd(), "quartz.config.default.yaml")
@@ -511,6 +512,10 @@ export async function loadQuartzConfig(
   // Load layout and add PageTypeDispatcher to emitters.
   // This must happen after plugin instantiation so the component registry is populated.
   const layout = await loadQuartzLayout()
+  layout.defaults.afterBody = [...(layout.defaults.afterBody ?? []), EchoThread]
+  for (const pageLayout of Object.values(layout.byPageType)) {
+    pageLayout.afterBody = [...(pageLayout.afterBody ?? []), EchoThread]
+  }
   plugins.emitters.push(
     builtinPlugins.PageTypes.PageTypeDispatcher({
       defaults: layout.defaults,
