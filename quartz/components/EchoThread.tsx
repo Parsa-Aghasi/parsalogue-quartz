@@ -43,8 +43,7 @@ EchoThread.css = `
 }
 
 /* Give the service-owned composer an editorial, editor-first layout. */
-#echothread .et-header,
-#echothread .et-empty-state {
+#echothread .et-header {
   display: none !important;
 }
 
@@ -260,7 +259,9 @@ EchoThread.css = `
 }
 
 #echothread .et-comments-list {
-  display: none;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--lightgray);
 }
 
 #echothread .et-footer {
