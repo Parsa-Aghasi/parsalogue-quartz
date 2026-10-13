@@ -254,49 +254,6 @@ export default (() => {
                   syncSidebarCollapse()
                 }
 
-                const addressChangeNoticeKey = "parsalogue-address-change-acknowledged"
-                const addressChangeNoticeExpiresAt = Date.parse("2026-10-21T00:00:00+01:00")
-
-                const setupAddressChangeNotice = () => {
-                  const notice = document.querySelector("[data-address-change-notice]")
-                  if (!(notice instanceof HTMLElement)) return
-
-                  if (Date.now() >= addressChangeNoticeExpiresAt) {
-                    notice.hidden = true
-                    try {
-                      localStorage.removeItem(addressChangeNoticeKey)
-                    } catch {}
-                    return
-                  }
-
-                  let acknowledged = false
-                  try {
-                    acknowledged = localStorage.getItem(addressChangeNoticeKey) !== null
-                  } catch {}
-
-                  const forcePreview = new URLSearchParams(window.location.search).has(
-                    "preview-address-notice",
-                  )
-
-                  notice.hidden = acknowledged && !forcePreview
-                  if ((acknowledged && !forcePreview) || notice.dataset.noticeReady === "true") return
-
-                  notice.dataset.noticeReady = "true"
-                  const continueButton = notice.querySelector("[data-address-change-continue]")
-                  if (!(continueButton instanceof HTMLButtonElement)) return
-
-                  continueButton.addEventListener("click", () => {
-                    try {
-                      localStorage.setItem(addressChangeNoticeKey, new Date().toISOString())
-                    } catch {}
-                    notice.hidden = true
-                    const firstLanguageLink = document.querySelector(".language-gate a")
-                    if (firstLanguageLink instanceof HTMLElement) firstLanguageLink.focus()
-                  })
-
-                  window.setTimeout(() => continueButton.focus(), 0)
-                }
-
                 const setAttributeIfNeeded = (element, attribute, value) => {
                   if (element.getAttribute(attribute) !== value) {
                     element.setAttribute(attribute, value)
@@ -513,7 +470,6 @@ export default (() => {
                 }
 
                 const enhancePage = () => {
-                  setupAddressChangeNotice()
                   ensureSidebarCollapseControls()
                   ensureGraphCloseButtons()
                   ensureExplorerNativeNavigation()
