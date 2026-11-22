@@ -1,6 +1,7 @@
 ---
 title: English Parsalogue
 description: "Written Thoughts of Parsa Aghasi: A Bilingual Blog"
+date: 2026-11-22
 lang: en
 aliases:
   - english
@@ -15,6 +16,7 @@ Written Thoughts of Parsa Aghasi
 
 ## Notes
 
+- [[Values]]
 - [[Circulation - an unnoticed delicacy(2)|Circulation: an unnoticed delicacy(2)]]
 - [[Circulation - an unnoticed delicacy(1)|Circulation: an unnoticed delicacy(1)]]
 - [[A system]]
